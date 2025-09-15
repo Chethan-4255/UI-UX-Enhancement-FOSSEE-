@@ -1,0 +1,18 @@
+/* Dark admin theme aligned with site theme */
+:root{--bg:#0f172a;--surf:#111827;--surf2:#1f2937;--text:#e5e7eb;--muted:#94a3b8;--pri:#06b6d4;--pri2:#0891b2}
+html,body{background:var(--bg)!important;color:var(--text)!important}
+#header{background:rgba(17,24,39,.9)!important;border-bottom:1px solid rgba(255,255,255,.08)}
+#header a:link,#header a:visited{color:var(--text)!important}
+#branding h1,#branding h1 a{color:var(--text)!important}
+.module,.module caption,.module h2{background:var(--surf)!important;color:var(--text)!important}
+.module{border:1px solid rgba(255,255,255,.08)!important;border-radius:10px}
+.breadcrumbs{background:var(--surf2)!important;color:var(--muted)!important}
+.object-tools a.addlink{background:linear-gradient(90deg,var(--pri),var(--pri2))!important;border:none;color:#001b1f}
+textarea,input,select{background:#0b1220!important;color:var(--text)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:8px}
+table{color:var(--text)!important}
+thead th{background:var(--surf2)!important;color:#cbd5e1!important;border-color:rgba(255,255,255,.08)!important}
+tr:nth-child(even){background:rgba(255,255,255,.02)}
+.button,.submit-row input[type=submit]{background:linear-gradient(90deg,var(--pri),var(--pri2))!important;border:none;border-radius:8px}
+.button:hover,.submit-row input[type=submit]:hover{filter:brightness(1.05)}
+.dashboard .module table th,.dashboard .module table td{border-color:rgba(255,255,255,.08)!important}
+

@@ -1,0 +1,62 @@
+{% extends 'workshop_app/base.html' %}
+
+{% block title %}
+    Awaiting activation
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block extra %}
+
+{% endblock %}
+
+{% block content %}
+    {% if status == '2' %}
+        <div class="container">
+            <div class="card glass mt-4">
+                <div class="card-body p-4">
+                    <p>Your email is already verified, Click <a href="{% url 'workshop_app:index' %}">here</a></p>
+                </div>
+            </div>
+        </div>
+    {% elif status == '1' %}
+        <script type="text/javascript">
+            window.setTimeout(function () {
+                location.href = "{% url 'workshop_app:register' %}"
+            }, 3000);
+        </script>
+        <div class="container">
+            <div class="card glass mt-4">
+                <div class="card-body p-4">
+                    <p>Your activation has expired, please register again</p>
+                </div>
+            </div>
+        </div>
+    {% elif status == '0' %}
+        <div class="container">
+            <div class="card glass mt-4">
+                <div class="card-body p-4">
+                    <p>Your account has been activated. Click <a href="{% url 'workshop_app:index' %}">here</a></p>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <script type="text/javascript">
+            window.setTimeout(function () {
+                location.href = "{% url 'workshop_app:logout' %}"
+            }, 5000);
+        </script>
+
+        <div class="container">
+            <div class="card glass mt-4">
+                <div class="card-body p-4">
+                    <h3 class="mb-2">Activation Awaiting</h3>
+                    <p>The activation link has been sent to your email. The link expires in <strong>24 hours</strong> from
+                        the date of registration. You will be logged out automatically.</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
