@@ -50,6 +50,21 @@
 	  const container = document.getElementById('reg-fields');
 	  if (!container) return;
 	  const fields = Array.from(container.querySelectorAll('p'));
+	  // Group fields into fewer steps (e.g., 6 logical steps)
+	  const groups = [
+	    ['username', 'email'],
+	    ['password', 'confirm_password'],
+	    ['first_name', 'last_name', 'title'],
+	    ['phone_number', 'state'],
+	    ['institute', 'department'],
+	    ['location', 'how_did_you_hear_about_us']
+	  ];
+	  // Map <p> blocks by their input name to re-order/display in groups
+	  const byName = Object.fromEntries(fields.map(p => {
+	    const input = p.querySelector('input, select, textarea');
+	    return [input && (input.name || input.id), p];
+	  }));
+	  const ordered = groups.map(names => names.map(n => byName[n]).filter(Boolean));
 	  let idx = 0;
 	  const nextBtn = document.getElementById('nextBtn');
 	  const prevBtn = document.getElementById('prevBtn');
@@ -59,15 +74,18 @@
 	  fields.forEach(p => { p.classList.add('mb-3'); });
 
 	  function renderStepper() {
-	    const total = fields.length;
+	    const total = ordered.length;
 	    stepper.innerHTML = `<small class="text-muted">Step ${idx+1} of ${total}</small>`;
 	  }
 
 	  function showCurrent() {
-	    fields.forEach((p, i) => p.style.display = i === idx ? 'block' : 'none');
+	    // Hide all
+	    fields.forEach(p => p.style.display = 'none');
+	    // Show current group
+	    ordered[idx].forEach(p => p.style.display = 'block');
 	    prevBtn.style.display = idx > 0 ? 'inline-block' : 'none';
-	    nextBtn.style.display = idx < fields.length - 1 ? 'inline-block' : 'none';
-	    submitBtn.style.display = idx === fields.length - 1 ? 'inline-block' : 'none';
+	    nextBtn.style.display = idx < ordered.length - 1 ? 'inline-block' : 'none';
+	    submitBtn.style.display = idx === ordered.length - 1 ? 'inline-block' : 'none';
 	    renderStepper();
 	  }
 
