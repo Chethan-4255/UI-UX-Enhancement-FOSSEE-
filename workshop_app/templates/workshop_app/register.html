@@ -89,9 +89,57 @@
 	    renderStepper();
 	  }
 
+	  function validateCurrentStep() {
+	    const currentFields = ordered[idx];
+	    let isValid = true;
+	    
+	    // Clear previous error messages
+	    currentFields.forEach(p => {
+	      p.querySelectorAll('.field-error').forEach(error => error.remove());
+	    });
+	    
+	    currentFields.forEach(p => {
+	      const input = p.querySelector('input, select, textarea');
+	      if (!input) return;
+	      
+	      if (input.hasAttribute('required') && !input.value.trim()) {
+	        isValid = false;
+	        showFieldError(input, 'This field is required');
+	      } else if (input.type === 'email' && input.value && !isValidEmail(input.value)) {
+	        isValid = false;
+	        showFieldError(input, 'Please enter a valid email address');
+	      } else if (input.name === 'password' && input.value && input.value.length < 8) {
+	        isValid = false;
+	        showFieldError(input, 'Password must be at least 8 characters long');
+	      } else if (input.name === 'confirm_password' && input.value) {
+	        const passwordField = document.querySelector('input[name="password"]');
+	        if (passwordField && input.value !== passwordField.value) {
+	          isValid = false;
+	          showFieldError(input, 'Passwords do not match');
+	        }
+	      }
+	    });
+	    
+	    return isValid;
+	  }
+
+	  function showFieldError(field, message) {
+	    const errorDiv = document.createElement('div');
+	    errorDiv.className = 'field-error text-danger small mt-1';
+	    errorDiv.textContent = message;
+	    field.parentNode.appendChild(errorDiv);
+	  }
+
+	  function isValidEmail(email) {
+	    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	    return emailRegex.test(email);
+	  }
+
 	  nextBtn.addEventListener('click', () => {
-	    if (idx < fields.length - 1) idx += 1;
-	    showCurrent();
+	    if (validateCurrentStep() && idx < ordered.length - 1) {
+	      idx += 1;
+	      showCurrent();
+	    }
 	  });
 	  prevBtn.addEventListener('click', () => {
 	    if (idx > 0) idx -= 1;

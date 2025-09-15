@@ -34,10 +34,16 @@ python -m venv .venv
 - Public Statistics page: filters card, tables, and dark-friendly charts.
 - Activation page: removed bright jumbotron; now a dark glass card.
 - Subtle micro-animations on cards and buttons.
+- Added Python-themed favicon for better branding.
+- Multi-step registration with per-step validation (prevents Next until current fields are valid).
 
 ### Admin theming
 - Added `workshop_portal/templates/admin/base_site.html` to inject a custom stylesheet.
 - Added `workshop_app/static/workshop_app/css/admin_theme.css` to theme Django admin with the same dark palette.
+
+### Additional enhancements
+- Added Python-themed favicon (`workshop_app/static/workshop_app/img/fav.png`) for better branding.
+- Implemented per-step validation in registration form to prevent proceeding with invalid data.
 
 ## Design principles
 - Readability first: good contrast, calmer colors, and generous spacing.
@@ -65,4 +71,4 @@ Making every state (dropdowns, dialogs, table headers, form errors) readable in 
 ## Screenshots (before ➜ after)
 - Login: docs/before_login.png ➜ docs/after_login.png
 - Stats: docs/before_stats.png ➜ docs/after_stats.png
-- Activation: docs/before_activation.png ➜ docs/after_activation.png
+- Activation: docs/before_registration.png ➜ docs/after_registration.png
