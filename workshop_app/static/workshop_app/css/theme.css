@@ -93,9 +93,13 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* Dropdowns */
-.dropdown-menu { background: #0f172a; border: 1px solid rgba(255,255,255,.08); }
+.dropdown-menu { background: #0f172a; border: 1px solid rgba(255,255,255,.08); min-width: 12rem; right: 0; left: auto; }
 .dropdown-item { color: var(--color-text); }
 .dropdown-item:hover { background: rgba(255,255,255,.06); color: #fff; }
+.badge, .chip { display: inline-flex; align-items: center; padding: .25rem .5rem; border-radius: 999px; font-size: .85rem; line-height: 1; }
+.chip { background: rgba(255,255,255,.08); color: #e2e8f0; gap: .35rem; }
+.chip .chip-close { cursor: pointer; opacity: .8; }
+.chip .chip-close:hover { opacity: 1; }
 
 /* Footer */
 .footer {
